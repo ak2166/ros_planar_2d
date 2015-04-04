@@ -31,12 +31,12 @@
         <joint name="joint1" value="1.9496" />
         <joint name="joint2" value="0.7565" />
     </group_state>
-    <group_state name="pose_5" group="arm_group">
+    <group_state name="pose_five" group="arm_group">
         <joint name="joint1" value="0.3788" />
         <joint name="joint2" value="0.7565" />
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="end_effector" parent_link="link3" group="arm_group" parent_group="arm_group" />
+    <end_effector name="end_effector" parent_link="link3" group="arm_group" />
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="base_link" />
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
