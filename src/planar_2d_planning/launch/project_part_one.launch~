@@ -1,0 +1,11 @@
+<launch>
+    <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find planar_2d_description)/urdf/planar_2d.urdf'" />
+    <arg name="srdf_file" default="$(find xacro)/xacro.py '$(find planar_2d_configuration)/srdf/planar_2d.srdf'" />
+    <param name="robot_description" command="$(arg urdf_file)" />
+    <param name="robot_description_semantic" command="$(arg srdf_file)" />
+    <node 
+        pkg="planar_2d_planning"
+	type="project_part_one"
+	name="planning_node"
+    />
+</launch>

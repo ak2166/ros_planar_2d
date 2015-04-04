@@ -4,7 +4,8 @@ project(planar_2d_planning)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS roscpp moveit_core moveit_ros_planning moveit_ros_planning_interface pluginlib cmake_modules)
+
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -76,11 +77,18 @@ find_package(catkin REQUIRED)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES planar_2d_planning
-#  CATKIN_DEPENDS other_catkin_pkg
-#  DEPENDS system_lib
+  CATKIN_DEPENDS 
+    moveit_core
+    moveit_ros_planning_interface
+    interactive_markers  
+
 )
+
+find_package(Eigen REQUIRED)
+
+include_directories(SYSTEM ${Boost_INCLUDE_DIR} ${EIGEN_INCLUDE_DIRS})
+include_directories(${catkin_INCLUDE_DIRS})
+link_directories(${catkin_LIBRARY_DIRS})
 
 ###########
 ## Build ##
@@ -96,16 +104,16 @@ catkin_package(
 # )
 
 ## Declare a cpp executable
-# add_executable(planar_2d_planning_node src/planar_2d_planning_node.cpp)
+add_executable(project_part_one src/project_part_one.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(planar_2d_planning_node planar_2d_planning_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(planar_2d_planning_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(project_part_one
+  ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
