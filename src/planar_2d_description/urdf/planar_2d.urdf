@@ -13,9 +13,9 @@
 
     <link name="link1">
     	  <visual>
-	      <origin xyz=".05 0 0" rpy="0 1.57079 0" />
+	      <origin xyz="0.0635635 0 0" rpy="0 1.57079 0" />
      	      <geometry>
-		    <cylinder radius=".02" length=".1" />
+		    <cylinder radius=".01905" length="0.127127"/>
      	      </geometry>
 	      <material name="Cyan">
        		    <color rgba="0 1.0 1.0 1.0"/>
@@ -25,9 +25,9 @@
 
     <link name="link2">
     	  <visual>
-	      <origin xyz=".05 0 0" rpy="0 1.57079 0" />
+	      <origin xyz="0.0733425 0 0" rpy="0 1.57079 0" />
      	      <geometry>
-		    <cylinder radius=".02" length=".1" />
+		    <cylinder radius="0.01905" length="0.146685"/>
      	      </geometry>
 	      <material name="Cyan">
        		    <color rgba="0 1.0 1.0 1.0"/>
@@ -47,13 +47,13 @@
     <joint name="joint2" type="continuous">
     	   <parent link="link1"/>
 	   <child link="link2"/>
-	   <origin xyz=".1 0 0" rpy="0 0 0"/>
+	   <origin xyz="0.127127 0 0" rpy="0 0 0"/>
 	   <axis xyz="0 0 1"/>
     </joint>
     <joint name="end_effector" type="fixed">
     	   <parent link="link2"/>
 	   <child link="link3"/>
-	   <origin xyz=".1 0 0" rpy="0 0 0"/>
+	   <origin xyz="0.146685 0 0" rpy="0 0 0"/>
 	   <axis xyz="0 0 1"/>
     </joint>
 </robot>
