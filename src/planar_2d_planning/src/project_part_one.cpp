@@ -23,10 +23,26 @@ int main(int argc, char **argv)
   ros::Publisher display_publisher = nh.advertise<moveit_msgs::DisplayTrajectory>("/move_group/display_planned_path", 1, true);
   moveit_msgs::DisplayTrajectory display_trajectory;
   geometry_msgs::Pose target_pose1;
-  target_pose1.position.x = 0.02;
-  target_pose1.position.y = .30;
-  target_pose1.position.z = 0.0;
-  group.setPoseTarget(target_pose1);
+  
+  moveit_msgs::OrientationConstraint ocm;
+  ocm.link_name = "link3";
+  ocm.header.frame_id = "link3";
+  ocm.orientation.w = 1.0;
+  ocm.absolute_x_axis_tolerance = 6.28318530718;
+  ocm.absolute_y_axis_tolerance = 6.28318530718;
+  ocm.absolute_z_axis_tolerance = 6.28318530718;
+  ocm.weight = 1.0;
+
+  moveit_msgs::Constraints test_constraints;
+  test_constraints.orientation_constraints.push_back(ocm);
+  group.setPathConstraints(test_constraints);
+
+  //target_pose1.orientation.w = 1.0;
+  target_pose1.position.x = 0.10;
+  target_pose1.position.y = 0.10;
+  target_pose1.position.z = 0.05;
+  //group.setPoseTarget(target_pose1);
+  group.setPositionTarget(0.08, 0.08, 0.05, "link3");
   moveit::planning_interface::MoveGroup::Plan my_plan;
   bool success = group.plan(my_plan);
 
