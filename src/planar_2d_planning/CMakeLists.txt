@@ -76,6 +76,7 @@ find_package(catkin REQUIRED COMPONENTS roscpp moveit_core moveit_ros_planning m
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
+find_package(Boost REQUIRED system filesystem date_time thread)
 catkin_package(
   CATKIN_DEPENDS 
     moveit_core

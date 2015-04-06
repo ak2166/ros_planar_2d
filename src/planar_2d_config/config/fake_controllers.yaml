@@ -3,3 +3,6 @@ controller_list:
     joints:
       - joint1
       - joint2
+  - name: fake_eef_controller
+    joints:
+      []

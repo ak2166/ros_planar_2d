@@ -9,6 +9,9 @@
 #include <moveit_msgs/DisplayTrajectory.h>
 #include <moveit_msgs/PlanningScene.h>
 #include <moveit/move_group_interface/move_group.h>
+#include <moveit/robot_model_loader/robot_model_loader.h>
+#include <moveit/robot_model/robot_model.h>
+#include <moveit/robot_state/robot_state.h>
 #include <moveit_msgs/DisplayRobotState.h>
 #include <moveit_msgs/DisplayTrajectory.h>
 
@@ -18,31 +21,19 @@ int main(int argc, char **argv)
   ros::NodeHandle nh;
   ros::AsyncSpinner spinner(1);
   spinner.start();
+
   moveit::planning_interface::MoveGroup group("arm_group");
   moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
-  ros::Publisher display_publisher = nh.advertise<moveit_msgs::DisplayTrajectory>("/move_group/display_planned_path", 1, true);
+  ros::Publisher display_publisher = nh.advertise<moveit_msgs::DisplayTrajectory>("/arm_group/display_planned_path", 1, true);
   moveit_msgs::DisplayTrajectory display_trajectory;
-  geometry_msgs::Pose target_pose1;
-  
-  moveit_msgs::OrientationConstraint ocm;
-  ocm.link_name = "link3";
-  ocm.header.frame_id = "link3";
-  ocm.orientation.w = 1.0;
-  ocm.absolute_x_axis_tolerance = 6.28318530718;
-  ocm.absolute_y_axis_tolerance = 6.28318530718;
-  ocm.absolute_z_axis_tolerance = 6.28318530718;
-  ocm.weight = 1.0;
+  //geometry_msgs::Pose target_pose1;
+  ROS_INFO("Reference frame: %s", group.getPlanningFrame().c_str());
+  ROS_INFO("Reference frame: %s", group.getEndEffectorLink().c_str());
 
-  moveit_msgs::Constraints test_constraints;
-  test_constraints.orientation_constraints.push_back(ocm);
-  group.setPathConstraints(test_constraints);
-
-  //target_pose1.orientation.w = 1.0;
-  target_pose1.position.x = 0.10;
-  target_pose1.position.y = 0.10;
-  target_pose1.position.z = 0.05;
-  //group.setPoseTarget(target_pose1);
-  group.setPositionTarget(0.08, 0.08, 0.05, "link3");
+  ROS_INFO_STREAM("" << group.getCurrentPose());
+  group.setPositionTarget(group.getCurrentPose().pose.position.x, group.getCurrentPose().pose.position.y, group.getCurrentPose().pose.position.z, "link3");
+  //group.setRandomTarget();
+  group.setGoalTolerance(0.1);
   moveit::planning_interface::MoveGroup::Plan my_plan;
   bool success = group.plan(my_plan);
 
