@@ -1,0 +1,6 @@
+arm_group:
+  kinematics_solver: planar_2d_arm_group_kinematics/IKFastKinematicsPlugin
+  kinematics_solver_attempts: 3
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.005
+  position_only_ik: true

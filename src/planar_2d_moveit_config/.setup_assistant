@@ -1,0 +1,8 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: planar_2d_description
+    relative_path: urdf/planar_2d.urdf
+  SRDF:
+    relative_path: config/planar_2d.srdf
+  CONFIG:
+    generated_timestamp: 1428284037
