@@ -31,7 +31,7 @@ int main(int argc, char **argv)
   ROS_INFO("Reference frame: %s", group.getEndEffectorLink().c_str());
 
   ROS_INFO_STREAM("" << group.getCurrentPose());
-  group.setPositionTarget(group.getCurrentPose().pose.position.x, group.getCurrentPose().pose.position.y, group.getCurrentPose().pose.position.z, "link3");
+  group.setPositionTarget(0.10, 0.0, group.getCurrentPose().pose.position.z, "link3");
   //group.setRandomTarget();
   group.setGoalTolerance(0.1);
   moveit::planning_interface::MoveGroup::Plan my_plan;
