@@ -7,3 +7,5 @@ Installed openRAVE on Ubuntu 14.04 following these instructions: http://www.aiza
 openRAVE usage via the following: http://moveit.ros.org/wiki/Kinematics/IKFast
 
 In order to create the file planar_2d.dae, needed to spin up an AWS server running 12.04 and ROS hydro, then scp files between host ROS machine and AWS.
+
+To successfully use custom ikfast 2D solver, must clone the source for package moveit_ikfast, and update line that specifies behavior for given IK fast solver type. In this case had to modify for the case of TranslationXY2D. 

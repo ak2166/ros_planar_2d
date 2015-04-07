@@ -1,0 +1,13 @@
+<launch>
+  <include file="$(find planar_2d_config)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="true"/>
+  </include>
+
+  <node name="planar_2d_kinematics"
+        pkg="planar_2d_planning"
+        type="project_part_one_kinematics"
+        respawn="false" output="screen">
+    <rosparam command="load"
+              file="$(find planar_2d_config)/config/kinematics.yaml"/>
+  </node>
+</launch>

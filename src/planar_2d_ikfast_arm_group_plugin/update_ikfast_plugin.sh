@@ -1,0 +1,1 @@
+rosrun moveit_ikfast create_ikfast_moveit_plugin.py planar_2d arm_group planar_2d_ikfast_arm_group_plugin /home/anthony/ros_planar_2d/src/planar_2d_ikfast_arm_group_plugin/src/planar_2d_arm_group_ikfast_solver.cpp
