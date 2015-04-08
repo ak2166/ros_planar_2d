@@ -24,22 +24,46 @@ int main(int argc, char **argv)
 
   moveit::planning_interface::MoveGroup group("arm_group");
   moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
-  ros::Publisher display_publisher = nh.advertise<moveit_msgs::DisplayTrajectory>("/arm_group/display_planned_path", 1, true);
-  moveit_msgs::DisplayTrajectory display_trajectory;
-  //geometry_msgs::Pose target_pose1;
+  
   ROS_INFO("Reference frame: %s", group.getPlanningFrame().c_str());
   ROS_INFO("Reference frame: %s", group.getEndEffectorLink().c_str());
 
   ROS_INFO_STREAM("" << group.getCurrentPose());
-  group.setPositionTarget(0.10, 0.0, group.getCurrentPose().pose.position.z, "link3");
-  //group.setRandomTarget();
-  group.setGoalTolerance(0.1);
-  moveit::planning_interface::MoveGroup::Plan my_plan;
-  bool success = group.plan(my_plan);
+  std::vector<geometry_msgs::Pose> waypoints;
 
-  ROS_INFO("Visualizing plan 1 (pose goal) %s",success?"":"FAILED");
+  geometry_msgs::Pose target_pose;
+  target_pose.position.x = 0.2 - 0.2;
+  target_pose.position.y = 0.08 - 0.2;
+  waypoints.push_back(target_pose);
+
+  target_pose.position.x = 0.3 - 0.2;
+  target_pose.position.y = 0.02 - 0.2;
+  waypoints.push_back(target_pose);
+
+  target_pose.position.x = 0.38 - 0.2;
+  target_pose.position.y = 0.32 - 0.2;
+  waypoints.push_back(target_pose);
+  
+  target_pose.position.x = 0.02 - 0.2;
+  target_pose.position.y = 0.38 - 0.2;
+  waypoints.push_back(target_pose);
+  
+  target_pose.position.x = 0.38 - 0.2;
+  target_pose.position.y = 0.38 - 0.2;
+  waypoints.push_back(target_pose);
+  
+  group.setGoalTolerance(0.1);
+  
+  moveit_msgs::RobotTrajectory trajectory;
+  double fraction = group.computeCartesianPath(waypoints,
+					       0.001,  // eef_step
+					       0.0,   // jump_threshold
+					       trajectory);
+
+  ROS_INFO("Visualizing plan 4 (cartesian path) (%.2f%% acheived)",
+	   fraction * 100.0);
   /* Sleep to give Rviz time to visualize the plan. */
-  sleep(5.0);
+  sleep(15.0);
 
   
 }
