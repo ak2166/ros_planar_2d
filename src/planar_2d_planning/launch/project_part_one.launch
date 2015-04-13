@@ -1,6 +1,4 @@
 <launch>
-
-
     <include file="$(find planar_2d_config)/launch/planar_2d_moveit_controller_manager.launch.xml"/>
     <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find planar_2d_description)/urdf/planar_2d.urdf'" />
     <arg name="srdf_file" default="$(find xacro)/xacro.py '$(find planar_2d_config)/config/planar_2d.srdf'" />
