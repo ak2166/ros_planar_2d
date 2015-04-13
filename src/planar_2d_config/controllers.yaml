@@ -3,6 +3,6 @@ controller_list:
    action_ns: follow_joint_trajectory
    type: FollowJointTrajectory
    default: true
-   joints
+   joints:
      - joint1
      - joint2
