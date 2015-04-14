@@ -44,7 +44,7 @@ int main(int argc, char **argv)
   target_pose.position.y = 0.38 - 0.2;
   waypoints.push_back(target_pose);
   
-  group.setGoalTolerance(0.1);
+  group.setGoalTolerance(0.001);
   
   moveit_msgs::RobotTrajectory trajectory;
   double fraction = group.computeCartesianPath(waypoints,
@@ -54,8 +54,11 @@ int main(int argc, char **argv)
 
   ROS_INFO("Visualizing plan 4 (cartesian path) (%.2f%% acheived)",
 	   fraction * 100.0);
-  /* Sleep to give Rviz time to visualize the plan. */
-  group.move();
-  ROS_INFO("Move command issued.");
+  
+  //Have a trajectory, need to 
+  moveit::planning_interface::MoveGroup::Plan plan;
+  plan.trajectory_ = trajectory;
+  group.execute(plan);
+  
   
 }
