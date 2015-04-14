@@ -56,7 +56,6 @@ int main(int argc, char **argv)
 	   fraction * 100.0);
   /* Sleep to give Rviz time to visualize the plan. */
   group.move();
-  sleep(15.0);
-
+  ROS_INFO("Move command issued.");
   
 }
