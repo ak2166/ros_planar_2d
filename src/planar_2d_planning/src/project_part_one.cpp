@@ -6,7 +6,6 @@
 #include <moveit/planning_interface/planning_interface.h>
 #include <moveit/move_group_interface/move_group.h>
 
-
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "plan_node");
@@ -16,7 +15,7 @@ int main(int argc, char **argv)
 
   moveit::planning_interface::MoveGroup group("arm_group");
   moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
-  
+
   ROS_INFO("Reference frame: %s", group.getPlanningFrame().c_str());
   ROS_INFO("Reference frame: %s", group.getEndEffectorLink().c_str());
 
@@ -55,7 +54,7 @@ int main(int argc, char **argv)
   ROS_INFO("Visualizing plan 4 (cartesian path) (%.2f%% acheived)",
 	   fraction * 100.0);
   
-  //Have a trajectory, need to 
+  //Have a trajectory, need to add it to plan and then execute
   moveit::planning_interface::MoveGroup::Plan plan;
   plan.trajectory_ = trajectory;
   group.execute(plan);
