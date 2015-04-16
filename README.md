@@ -12,4 +12,6 @@ To successfully use custom ikfast 2D solver, must clone the source for package m
 
 Once all configuration is done, and a fake trajectory can be solved and executed, and we can turn off fake trajectories. See launch file for part one to see how this is achieved. 
 
-Next steps involve creating a joint controller for our robot see joint_trajectory_controller package.
+The joint controller architecture needs to include an action server, with the server handling communication with the Arduino and the movers. 
+The arduino should be sending back it's move progress to the server, which holds all the points in the trajectory? 
+Or does the server incrementally receive positions from the client?
